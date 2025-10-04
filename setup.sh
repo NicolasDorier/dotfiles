@@ -7,3 +7,12 @@ yay -S localsend-bin --no-confirm
 
 yay -S visual-studio-code-bin --no-confirm
 yay -S nautilus-open-any-terminal --no-confirm
+
+
+
+# Fix screen record on carbon X1
+yay -S intel-media-driver
+
+
+ln -s config/hypr ~/.config/hypr
+ln -s applications ~/.local/share/applications
