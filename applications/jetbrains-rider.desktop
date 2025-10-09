@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=JetBrains Rider
+Icon=/opt/JetBrains Rider-2025.2.2.1/bin/rider.svg
+Exec="/opt/JetBrains Rider-2025.2.2.1/bin/rider" %f
+Comment=A cross-platform IDE for .NET
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=jetbrains-rider
+StartupNotify=true

@@ -16,3 +16,6 @@ yay -S intel-media-driver
 
 ln -s config/hypr ~/.config/hypr
 ln -s applications ~/.local/share/applications
+
+
+sudo pacman -Syu cifs-utils
