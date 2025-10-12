@@ -5,8 +5,8 @@ sudo pacman -Sy keepassxc
 # Then instlal https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/
 yay -S localsend-bin --no-confirm
 
-yay -S visual-studio-code-bin --no-confirm
-yay -S nautilus-open-any-terminal --no-confirm
+yay -S visual-studio-code-bin --noconfirm
+yay -S nautilus-open-any-terminal --noconfirm
 
 
 
@@ -14,8 +14,8 @@ yay -S nautilus-open-any-terminal --no-confirm
 yay -S intel-media-driver
 
 
-ln -s config/hypr ~/.config/hypr
-ln -s applications ~/.local/share/applications
-
+ln -s $(pwd)/config/hypr ~/.config/hypr
+ln -s $(pwd)/applications ~/.local/share/applications
+ln -s $(pwd)/bin/ ~/.local/bin
 
 sudo pacman -Syu cifs-utils
