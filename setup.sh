@@ -21,4 +21,5 @@ ln -s $(pwd)/bin/ ~/.local/bin
 sudo pacman -Syu cifs-utils
 sudo pacman -S vulkan-intel
 sudo pacman -Syu vlc
+sudo pacman -Syu aspnet-runtime dotnet-runtime dotnet-sdk
 
