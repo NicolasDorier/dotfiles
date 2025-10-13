@@ -1,0 +1,11 @@
+[Unit]
+Description=Synology - Music
+
+[Mount]
+What=//synology.lan/music
+Where=/mnt/synology/music
+Type=cifs
+Options=credentials=/etc/samba/credentials,_netdev,iocharset=utf8,uid=1000,gid=1000,file_mode=0644,dir_mode=0755
+
+[Install]
+WantedBy=multi-user.target
