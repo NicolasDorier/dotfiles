@@ -23,3 +23,5 @@ sudo pacman -S vulkan-intel
 sudo pacman -Syu vlc
 sudo pacman -Syu aspnet-runtime dotnet-runtime dotnet-sdk
 
+rm ~/.bashrc && ln -s "$(pwd)/.bashrc" ~/.bashrc
+
