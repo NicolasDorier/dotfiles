@@ -7,3 +7,4 @@ source ~/.local/share/omarchy/default/bash/rc
 # Make an alias for invoking commands you use constantly
 # alias p='python'
 export SYSTEMD_LESS=FRX
+export PATH="$PATH:$HOME/.dotnet/tools"
