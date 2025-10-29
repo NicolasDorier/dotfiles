@@ -14,3 +14,7 @@ export PATH="$PATH:$HOME/.dotnet/tools"
 alias vim="nvim"
 alias cat="bat"
 eval "$(zoxide init bash)"
+
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx

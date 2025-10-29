@@ -17,6 +17,7 @@ yay -S intel-media-driver
 ln -s $(pwd)/config/hypr ~/.config/hypr
 ln -s $(pwd)/applications ~/.local/share/applications
 ln -s $(pwd)/bin/ ~/.local/bin
+ln -s $(pwd)/config/waybar ~/.config/waybar
 
 sudo pacman -Syu cifs-utils
 sudo pacman -S vulkan-intel
