@@ -4,7 +4,7 @@ set -euo pipefail
 usage() {
   cat <<EOF
 Usage:
-  vid2gif [-i INPUT] [-o OUTPUT] [-r FPS] [-w WIDTH] [-F FORMAT]
+  to-gif [-i INPUT] [-o OUTPUT] [-r FPS] [-w WIDTH] [-F FORMAT]
   echo ... | vid2gif              # stdin -> stdout
   vid2gif -i in.mp4 -o out.gif    # file -> file
 
