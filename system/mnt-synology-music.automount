@@ -3,6 +3,7 @@ Description=Automount Synology - Music
 
 [Automount]
 Where=/mnt/synology/music
+TimeoutIdleSec=0
 
 [Install]
 WantedBy=multi-user.target
