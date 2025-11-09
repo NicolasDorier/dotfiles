@@ -18,8 +18,15 @@ ln -s $(pwd)/config/hypr ~/.config/hypr
 ln -s $(pwd)/applications ~/.local/share/applications
 ln -s $(pwd)/bin/ ~/.local/bin
 ln -s $(pwd)/config/waybar ~/.config/waybar
+sudo ln -s $PWD/system/* /etc/systemd/system/
+sudo systemctl daemon-reload
 
+# SMB setup
 sudo pacman -Syu cifs-utils
+# Put credentials in /etc/samba/credentials with the following format
+# username=user
+# password=pass
+
 sudo pacman -S vulkan-intel
 sudo pacman -Syu vlc
 sudo pacman -Syu aspnet-runtime dotnet-runtime dotnet-sdk
