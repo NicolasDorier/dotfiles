@@ -18,6 +18,8 @@ ln -s $(pwd)/config/hypr ~/.config/hypr
 ln -s $(pwd)/applications ~/.local/share/applications
 ln -s $(pwd)/bin/ ~/.local/bin
 ln -s $(pwd)/config/waybar ~/.config/waybar
+ln -s $(pwd)/config/hypr/apps/jetbrains.conf  ~/.local/share/omarchy/default/hypr/apps/jetbrains.conf
+
 sudo ln -s $PWD/system/* /etc/systemd/system/
 sudo systemctl daemon-reload
 
