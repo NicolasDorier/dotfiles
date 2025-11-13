@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=DataGrip
+Icon=/opt/DataGrip-2025.2.4/bin/datagrip.svg
+Exec="/opt/DataGrip-2025.2.4/bin/datagrip.sh"
+Comment=A cross-platform IDE for Database access
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=jetbrains-datagrip
+StartupNotify=true
