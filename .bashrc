@@ -10,7 +10,7 @@ source ~/.local/share/omarchy/default/bash/rc
 # Make an alias for invoking commands you use constantly
 # alias p='python'
 export SYSTEMD_LESS=FRX
-export PATH="$PATH:$HOME/.dotnet/tools"
+export PATH="$HOME/.local/bin:$PATH:$HOME/.dotnet/tools"
 alias vim="nvim"
 alias cat="bat"
 alias gitcp="git commit -a --amend --no-edit; git push -f"
