@@ -17,7 +17,7 @@
   ],
   "hyprland/workspaces": {
     "on-click": "activate",
-    "format": "{icon}:{windows}",
+    "format": "{icon}",
     "format-icons": {
       "default": "",
       "1": "1",
@@ -39,7 +39,7 @@
       "5": []
     },
     "workspace-taskbar": {
-      "enable": true,
+      "enable": false,
       "format": "{icon}"
     }
   },
