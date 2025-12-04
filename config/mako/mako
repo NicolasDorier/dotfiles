@@ -12,6 +12,8 @@ default-timeout=5000
 max-icon-size=32
 font=JetBrainsMono Nerd Font 11
 
+invisible=0
+
 [app-name=Spotify]
 invisible=1
 
