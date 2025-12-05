@@ -1,0 +1,5 @@
+
+[[explicits]]
+exec="$HOME/.local/bin/donotdisurb-toggle.sh"
+alias="Toggle do not disturb"
+

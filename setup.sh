@@ -19,6 +19,7 @@ ln -s $(pwd)/applications ~/.local/share/applications
 ln -s $(pwd)/bin/ ~/.local/bin
 ln -s $(pwd)/config/waybar ~/.config/waybar
 ln -s $(pwd)/config/mako ~/.config/mako
+ln -s $(pwd)/config/elephant ~/.config/elephant
 ln -s $(pwd)/config/ghostty ~/.config/ghostty
 ln -s $(pwd)/config/yazi ~/.config/yazi
 ln -s $(pwd)/config/hypr/apps/jetbrains.conf  ~/.local/share/omarchy/default/hypr/apps/jetbrains.conf
