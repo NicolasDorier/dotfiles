@@ -25,6 +25,11 @@ ln -s $(pwd)/config/yazi ~/.config/yazi
 ln -s $(pwd)/config/hypr/apps/jetbrains.conf  ~/.local/share/omarchy/default/hypr/apps/jetbrains.conf
 ln -s $PWD/nicolas ~/.config/omarchy/themes/nicolas
 
+
+rm -rf ~/.local/share/nautilus/scripts
+ln -s $PWD/nautilus/scripts ~/.local/share/nautilus/scripts
+nautilus -q
+
 sudo ln -s $PWD/system/* /etc/systemd/system/
 sudo systemctl daemon-reload
 
