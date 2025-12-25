@@ -50,6 +50,8 @@ install_config() {
   sudo install -m 0644 system/* /etc/systemd/system/
   sudo systemctl daemon-reload
   link "$script_dir/.bashrc" ~/.bashrc
+
+  sudo cp $script_dir/hosts /etc/hosts && sudo chown root /etc/hosts
 }
 
 setup_mime() {
