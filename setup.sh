@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+
 setup_tools() {
   sudo pacman -Sy keepassxc
   # Then instlal https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/
@@ -31,24 +33,23 @@ link() {
 }
 
 install_config() {
-  link $(pwd)/config/hypr ~/.config/hypr
-  link $(pwd)/applications ~/.local/share/applications
-  link $(pwd)/bin/ ~/.local/bin
-  link $(pwd)/config/waybar ~/.config/waybar
-  link $(pwd)/config/mako ~/.config/mako
-  link $(pwd)/config/elephant ~/.config/elephant
-  link $(pwd)/config/ghostty ~/.config/ghostty
-  link $(pwd)/config/yazi ~/.config/yazi
-  link $(pwd)/config/hypr/apps/jetbrains.conf  ~/.local/share/omarchy/default/hypr/apps/jetbrains.conf
-  link $PWD/nicolas ~/.config/omarchy/themes/nicolas
-  rm -rf ~/.local/share/nautilus/scripts
+  link $script_dir/config/hypr ~/.config/hypr
+  link $script_dir/applications ~/.local/share/applications
+  link $script_dir/bin/ ~/.local/bin
+  link $script_dir/config/waybar ~/.config/waybar
+  link $script_dir/config/mako ~/.config/mako
+  link $script_dir/config/elephant ~/.config/elephant
+  link $script_dir/config/ghostty ~/.config/ghostty
+  link $script_dir/config/yazi ~/.config/yazi
+  link $script_dir/config/hypr/apps/jetbrains.conf  ~/.local/share/omarchy/default/hypr/apps/jetbrains.conf
+  link $script_dir/nicolas ~/.config/omarchy/themes/nicolas
 
-  link $PWD/nautilus/scripts ~/.local/share/nautilus/scripts
+  link $script_dir/nautilus/scripts ~/.local/share/nautilus/scripts
   nautilus -q
 
   sudo install -m 0644 system/* /etc/systemd/system/
   sudo systemctl daemon-reload
-  rm ~/.bashrc && link "$(pwd)/.bashrc" ~/.bashrc
+  link "$script_dir/.bashrc" ~/.bashrc
 }
 
 setup_mime() {
