@@ -38,7 +38,7 @@ else
   out_target="-"; out_args=(-f mp4)
 fi
 
-exec ffmpeg -hide_banner -y \
+exec ffmpeg -hide_banner -nostdin -progress -y \
   -vaapi_device /dev/dri/renderD128 \
   "${in_args[@]}" \
   -map 0:v:0 -map 0:a? \

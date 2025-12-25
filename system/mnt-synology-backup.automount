@@ -1,0 +1,9 @@
+[Unit]
+Description=Automount Synology - Backup
+
+[Automount]
+Where=/mnt/synology/backup
+TimeoutIdleSec=0
+
+[Install]
+WantedBy=multi-user.target

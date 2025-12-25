@@ -1,0 +1,10 @@
+
+[Unit]
+Description=Youtube Encoder
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/inotify-youtube.sh
+
+[Install]
+WantedBy=default.target
