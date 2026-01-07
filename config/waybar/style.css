@@ -1,7 +1,7 @@
 @import "../omarchy/current/theme/waybar.css";
 
 * {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: @background;
   color: @foreground;
   min-height: 0;
   font-family: 'JetBrainsMono Nerd Font';
