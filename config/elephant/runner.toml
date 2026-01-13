@@ -3,3 +3,11 @@
 exec="$HOME/.local/bin/donotdisurb-toggle.sh"
 alias="Toggle do not disturb"
 
+[[explicits]]
+exec="$HOME/.local/bin/mount-aois-public.sh"
+alias="Mount aois public"
+
+[[explicits]]
+exec="$HOME/.local/bin/unmount-aois-public.sh"
+alias="Unmount aois public"
+
