@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+echo "Starting"
 hidden_on_workspace=10
 
 hide() {
@@ -13,12 +14,8 @@ show() {
     }
 }
 
-sleep 1
-
-current_workspace=$(hyprctl activeworkspace -j | jq -r '.id')
-(( hidden_on_workspace == current_workspace )) && hide
-
-socket_path="/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
+socket_path="$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
+echo "Listening $socket_path"
 
 [[ ! -S "$socket_path" ]] && {
     echo "Error: Hyprland socket not found. Is Hyprland running?"
@@ -26,8 +23,8 @@ socket_path="/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
 }
 
 socat -u "UNIX-CONNECT:$socket_path" STDOUT | while read -r event; do
-    case $event in
-        workspace>>$hidden_on_workspace) hide ;;
-        workspace>>*) show ;;
+    case "$event" in
+        "workspace>>$hidden_on_workspace") hide ;;
+        "workspace>>"*) show ;;
     esac
 done

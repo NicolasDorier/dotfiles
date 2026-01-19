@@ -48,7 +48,11 @@ install_config() {
   nautilus -q
 
   sudo install -m 0644 system/* /etc/systemd/system/
+  sudo install -m 0644 system/user/* ~/.config/systemd/user/
   sudo systemctl daemon-reload
+
+  sudo systemctl enable --user --now hide-waybar-jetbrains.service
+
   link "$script_dir/.bashrc" ~/.bashrc
 
   sudo cp $script_dir/hosts /etc/hosts && sudo chown root /etc/hosts
