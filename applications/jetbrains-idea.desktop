@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=IntelliJ IDEA
+Icon=/opt/idea/bin/idea.svg
+Exec="/opt/idea/bin/idea.sh" %f
+Comment=The Leading IDE for Professional Development in Java and Kotlin
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=jetbrains-idea
+StartupNotify=true

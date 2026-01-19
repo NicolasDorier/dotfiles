@@ -1,0 +1,11 @@
+[Unit]
+Description=Hide Waybar on JetBrains Workspace
+
+[Service]
+Type=simple
+ExecStart=%h/dotfiles/bin/hide-waybar-jetbrains.sh
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
