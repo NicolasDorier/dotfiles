@@ -23,6 +23,10 @@ setup_tools() {
   sudo pacman -S vulkan-intel
   sudo pacman -Syu vlc
   sudo pacman -Syu aspnet-runtime dotnet-runtime dotnet-sdk
+
+  # OCR
+  yay -S ocrmypdf
+  sudo pacman -S tesseract tesseract-data-jpn tesseract-data-fra tesseract-data-jpn_vert
 }
 
 link() {
