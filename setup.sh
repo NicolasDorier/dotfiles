@@ -4,12 +4,12 @@ set -euo pipefail
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
 
 setup_tools() {
-  sudo pacman -Sy keepassxc
+  sudo pacman -S keepassxc
   # Then instlal https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/
-  yay -S localsend-bin --no-confirm
+  yay -S localsend-bin --noconfirm
   yay -S visual-studio-code-bin --noconfirm
   # Fix screen record on carbon X1
-  yay -S intel-media-driver
+  yay -S intel-media-driver --noconfirm
 
   # SMB setup
   sudo pacman -Syu cifs-utils
@@ -17,7 +17,7 @@ setup_tools() {
   # username=user
   # password=pass
   
-  yay -S brave-bin --no-confirm
+  yay -S brave-bin --noconfirm
   xdg-settings set default-web-browser brave-browser.desktop
 
   sudo pacman -S vulkan-intel
@@ -37,37 +37,38 @@ link() {
 }
 
 install_config() {
-  link $script_dir/config/hypr ~/.config/hypr
-  link $script_dir/applications ~/.local/share/applications
-  link $script_dir/bin/ ~/.local/bin
-  link $script_dir/config/waybar ~/.config/waybar
-  link $script_dir/config/mako ~/.config/mako
-  link $script_dir/config/elephant ~/.config/elephant
-  link $script_dir/config/ghostty ~/.config/ghostty
-  link $script_dir/config/yazi ~/.config/yazi
-  link $script_dir/config/brave-flags.conf ~/.config/brave-flags.conf
-  link $script_dir/config/hypr/apps/jetbrains.conf  ~/.local/share/omarchy/default/hypr/apps/jetbrains.conf
-  link $script_dir/themes ~/.config/omarchy/themes
+  link "$script_dir/config/hypr" ~/.config/hypr
+  link "$script_dir/applications" ~/.local/share/applications
+  link "$script_dir/bin/" ~/.local/bin
+  link "$script_dir/config/waybar" ~/.config/waybar
+  link "$script_dir/config/mako" ~/.config/mako
+  link "$script_dir/config/elephant" ~/.config/elephant
+  link "$script_dir/config/ghostty" ~/.config/ghostty
+  link "$script_dir/config/yazi" ~/.config/yazi
+  link "$script_dir/config/brave-flags.conf" ~/.config/brave-flags.conf
+  link "$script_dir/config/hypr/apps/jetbrains.conf" ~/.local/share/omarchy/default/hypr/apps/jetbrains.conf
+  link "$script_dir/themes" ~/.config/omarchy/themes
 
-  link $script_dir/nautilus/scripts ~/.local/share/nautilus/scripts
+  link "$script_dir/nautilus/scripts" ~/.local/share/nautilus/scripts
   nautilus -q
 
   sudo install -m 0644 system/* /etc/systemd/system/
-  sudo install -m 0644 system/user/* ~/.config/systemd/user/
+  install -m 0644 system/user/* ~/.config/systemd/user/
   sudo systemctl daemon-reload
 
-  sudo systemctl enable --user --now hide-waybar-jetbrains.service
+  systemctl --user enable --now hide-waybar-jetbrains.service
 
   link "$script_dir/.bashrc" ~/.bashrc
 
   sudo cp $script_dir/hosts /etc/hosts && sudo chown root /etc/hosts
 }
 
+
 setup_mime() {
     xdg-mime default vlc.desktop video/mp4
     xdg-mime default vlc.desktop video/x-msvideo
     xdg-mime default vlc.desktop video/x-matroska
-    xdg-mime default vlc.desktop video/x-flvv
+    xdg-mime default vlc.desktop video/x-flv
     xdg-mime default vlc.desktop video/x-ms-wmv
     xdg-mime default vlc.desktop video/mpeg
     xdg-mime default vlc.desktop video/ogg
