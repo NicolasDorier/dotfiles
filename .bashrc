@@ -19,4 +19,6 @@ eval "$(zoxide init bash)"
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
+
+# Default device
 export SANE_DEFAULT_DEVICE="epjitsu:libusb:003:007"

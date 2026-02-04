@@ -47,7 +47,7 @@ install_config() {
   link $script_dir/config/yazi ~/.config/yazi
   link $script_dir/config/brave-flags.conf ~/.config/brave-flags.conf
   link $script_dir/config/hypr/apps/jetbrains.conf  ~/.local/share/omarchy/default/hypr/apps/jetbrains.conf
-  link $script_dir/nicolas ~/.config/omarchy/themes/nicolas
+  link $script_dir/themes ~/.config/omarchy/themes
 
   link $script_dir/nautilus/scripts ~/.local/share/nautilus/scripts
   nautilus -q
