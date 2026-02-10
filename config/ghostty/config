@@ -29,3 +29,4 @@ keybind = super+control+shift+alt+arrow_right=resize_split:right,100
 
 # Slowdown mouse scrolling
 mouse-scroll-multiplier = 0.95
+async-backend = epoll
