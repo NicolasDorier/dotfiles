@@ -76,8 +76,11 @@ if [[ "$prompt" == "true" ]]; then
   scan_args+=(--batch-prompt)
 fi
 
+
+! [[ -n "$device" ]] && device=$(scanimage -L | sed -n "s/^device \`\([^']*\)' is a FUJITSU ScanSnap S1300i scanner$/\1/p")
 if [[ -n "$device" ]]; then
   scan_args+=(--device-name "$device")
+else
 fi
 
 if [[ -n "$mode" ]]; then
@@ -107,13 +110,14 @@ fi
 
 img2pdf "${pages[@]}" -o "$raw_pdf"
 
+tmp="$(mktemp --suffix=.pdf)" || exit 1
+qpdf "$raw_pdf" --rotate=180 -- "$tmp" && mv "$tmp" "$raw_pdf"
+
 notify-send "Starting OCR: $output"
 
 ocrmypdf \
   -l eng+jpn \
-  --deskew \
   --clean \
-  --rotate-pages \
   --optimize 3 \
   --tesseract-oem 1 \
   --force-ocr \
