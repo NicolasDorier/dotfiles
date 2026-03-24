@@ -25,7 +25,8 @@ setup_tools() {
   sudo pacman -Syu aspnet-runtime dotnet-runtime dotnet-sdk
 
   # OCR
-  yay -S ocrmypdf
+  yay -S jbig2enc --noconfirm
+  yay -S ocrmypdf --noconfirm
   sudo pacman -S tesseract tesseract-data-jpn tesseract-data-fra tesseract-data-jpn_vert
 }
 
