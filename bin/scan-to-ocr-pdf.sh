@@ -80,7 +80,6 @@ fi
 ! [[ -n "$device" ]] && device=$(scanimage -L | sed -n "s/^device \`\([^']*\)' is a FUJITSU ScanSnap S1300i scanner$/\1/p")
 if [[ -n "$device" ]]; then
   scan_args+=(--device-name "$device")
-else
 fi
 
 if [[ -n "$mode" ]]; then
@@ -98,7 +97,10 @@ fi
 # By default SANE_DEFAULT_DEVICE is used, that we setup in .bashrc
 (
   cd "$workdir"
-  scanimage "${scan_args[@]}"
+  if ! scanimage "${scan_args[@]}"; then
+    source ~/.local/bin/detect-scanner.sh
+    scanimage "${scan_args[@]}"
+  fi
 )
 
 shopt -s nullglob
