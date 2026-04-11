@@ -97,8 +97,10 @@ fi
 # By default SANE_DEFAULT_DEVICE is used, that we setup in .bashrc
 (
   cd "$workdir"
+  [[ -f /tmp/last-scanner ]] && export SANE_DEFAULT_DEVICE="$(</tmp/last-scanner)"
   if ! scanimage "${scan_args[@]}"; then
     source ~/.local/bin/detect-scanner.sh
+    printf '%s' "$SANE_DEFAULT_DEVICE" > /tmp/last-scanner
     scanimage "${scan_args[@]}"
   fi
 )
@@ -126,4 +128,5 @@ ocrmypdf \
   "$raw_pdf" \
   "$output"
 
+rm -rf "$workdir"
 notify-send "Saved OCR PDF: $output"

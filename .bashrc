@@ -14,6 +14,7 @@ export PATH="$HOME/.local/bin:$PATH:$HOME/.dotnet/tools"
 alias vim="nvim"
 alias cat="bat"
 alias gitcp="git commit -a --amend --no-edit; git push -f"
+alias processing="/opt/processing/bin/Processing"
 eval "$(zoxide init bash)"
 
 export GTK_IM_MODULE=fcitx

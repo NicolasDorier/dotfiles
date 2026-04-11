@@ -184,6 +184,7 @@ x-content/video-vcd=vlc.desktop;
 x-scheme-handler/aether=aether-protocol-handler.desktop;
 x-scheme-handler/icy=vlc.desktop;
 x-scheme-handler/icyx=vlc.desktop;
+x-scheme-handler/jetbrains=jetbrainsd.desktop;
 x-scheme-handler/mms=vlc.desktop;
 x-scheme-handler/mmsh=vlc.desktop;
 x-scheme-handler/rtmp=vlc.desktop;
