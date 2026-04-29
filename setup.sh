@@ -65,6 +65,9 @@ install_config() {
     ~/.config/systemd/user/
   sudo systemctl daemon-reload
 
+  # Put credentials in /etc/samba/credentials with the following format
+  # username=user
+  # password=pass
   sudo mkdir -p /mnt/synology/music /mnt/synology/backup
   sudo systemctl enable --now mnt-synology-backup.automount
   sudo systemctl enable --now mnt-synology-music.automount
