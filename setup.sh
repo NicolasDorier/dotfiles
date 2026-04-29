@@ -53,8 +53,16 @@ install_config() {
 
   link "$script_dir/nautilus/scripts" ~/.local/share/nautilus/scripts
 
-  sudo install -m 0644 system/* /etc/systemd/system/
-  install -m 0644 system/user/* ~/.config/systemd/user/
+  sudo install -m 0644 \
+    "$script_dir/system/mnt-synology-backup.automount" \
+    "$script_dir/system/mnt-synology-backup.mount" \
+    "$script_dir/system/mnt-synology-music.automount" \
+    "$script_dir/system/mnt-synology-music.mount" \
+    /etc/systemd/system/
+  install -m 0644 \
+    "$script_dir/system/user/hide-waybar-jetbrains.service" \
+    "$script_dir/system/user/inotify-youtube.service" \
+    ~/.config/systemd/user/
   sudo systemctl daemon-reload
 
   sudo mkdir -p /mnt/synology/music /mnt/synology/backup
