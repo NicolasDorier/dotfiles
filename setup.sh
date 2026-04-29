@@ -21,6 +21,7 @@ setup_tools() {
   xdg-settings set default-web-browser brave-browser.desktop
 
   sudo pacman -S vulkan-intel
+  sudo pacman -Syu zed
   sudo pacman -Syu vlc
   sudo pacman -Syu aspnet-runtime dotnet-runtime dotnet-sdk
 

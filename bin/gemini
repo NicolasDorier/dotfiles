@@ -1,2 +1,2 @@
 #!/bin/bash
-exec npx --yes @google/gemini-cli "$@"
+exec mise exec node@latest -- npx --yes @google/gemini-cli "$@"

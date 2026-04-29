@@ -1,2 +1,2 @@
 #!/bin/bash
-exec npx --yes @mariozechner/pi-coding-agent "$@"
+exec mise exec node@latest -- npx --yes @mariozechner/pi-coding-agent "$@"

@@ -1,2 +1,2 @@
 #!/bin/bash
-exec npx --yes opencode-ai "$@"
+exec mise exec node@latest -- npx --yes opencode-ai "$@"

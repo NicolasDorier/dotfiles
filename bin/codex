@@ -1,2 +1,2 @@
 #!/bin/bash
-exec npx --yes @openai/codex "$@"
+exec mise exec node@latest -- npx --yes @openai/codex "$@"
