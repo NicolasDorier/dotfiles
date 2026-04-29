@@ -52,12 +52,14 @@ install_config() {
   link "$script_dir/themes" ~/.config/omarchy/themes
 
   link "$script_dir/nautilus/scripts" ~/.local/share/nautilus/scripts
-  nautilus -q
 
   sudo install -m 0644 system/* /etc/systemd/system/
   install -m 0644 system/user/* ~/.config/systemd/user/
   sudo systemctl daemon-reload
 
+  sudo mkdir -p /mnt/synology/music /mnt/synology/backup
+  sudo systemctl enable --now mnt-synology-backup.automount
+  sudo systemctl enable --now mnt-synology-music.automount
   systemctl --user enable --now hide-waybar-jetbrains.service
 
   link "$script_dir/.bashrc" ~/.bashrc
