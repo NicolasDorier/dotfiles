@@ -25,6 +25,9 @@ setup_tools() {
   sudo pacman -Syu vlc
   sudo pacman -Syu aspnet-runtime dotnet-runtime dotnet-sdk
 
+  # Select mozc
+  sudo pacman -S fcitx5-configtool fcitx5-mozc
+
   # OCR
   yay -S jbig2enc --noconfirm
   yay -S ocrmypdf --noconfirm
