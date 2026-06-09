@@ -28,6 +28,12 @@ setup_tools() {
   # Select mozc
   sudo pacman -S fcitx5-configtool fcitx5-mozc
 
+  # Scanner
+  sudo pacman -S sane gscan2pdf
+  # Download driver for scansnap
+  sudo mkdir -p /usr/share/sane/epjitsu
+  sudo curl -L https://openfusion.net/public/files/1300i_0D12.nal -o /etc/sane.d/epjitsu/1300i_0D12.nal
+
   # OCR
   yay -S jbig2enc --noconfirm
   yay -S ocrmypdf --noconfirm

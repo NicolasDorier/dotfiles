@@ -16,6 +16,7 @@ alias cat="bat"
 alias gitcp="git commit -a --amend --no-edit; git push -f"
 alias processing="/opt/processing/bin/Processing"
 eval "$(zoxide init bash)"
+alias pushnuget='sudo bash -c "source /home/nicolasdorier/.nuget/NuGet/env.sh && ./PushNuget.sh"'
 
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
