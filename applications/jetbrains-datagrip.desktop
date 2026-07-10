@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=DataGrip
+Icon=/opt/jetbrains-datagrip/bin/datagrip.svg
+Exec="/opt/jetbrains-datagrip/bin/datagrip" %f
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=jetbrains-datagrip
+StartupNotify=true

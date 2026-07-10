@@ -1,0 +1,28 @@
+general {
+    lock_cmd = omarchy-system-lock                         # lock screen and 1password
+    before_sleep_cmd = loginctl lock-session               # lock before suspend.
+    after_sleep_cmd = hyprctl dispatch dpms on             # to avoid having to press a key twice to turn on the display.
+    inhibit_sleep = 3                                      # wait until screen is locked
+}
+
+#listener {
+#    timeout = 150
+#    on-timeout = hyprshade on signal-interference && hyprctl seterror disable && sleep 1 && hyprctl reload
+#    on-resume = hyprshade off
+#  }
+
+listener {
+    timeout = 5000                                            
+    on-timeout = pidof hyprlock
+}
+
+listener {
+    timeout = 500                     
+    on-timeout = loginctl lock-session # lock screen when timeout has passed
+}
+
+listener {
+    timeout = 5200                                           
+    on-timeout = hyprctl dispatch dpms off                   # screen off when timeout has passed
+    on-resume = hyprctl dispatch dpms on && brightnessctl -r # screen on when activity is detected
+}

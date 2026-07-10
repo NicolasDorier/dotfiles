@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=DataSpell
+Icon=/opt/jetbrains-dataspell/bin/dataspell.svg
+Exec="/opt/jetbrains-dataspell/bin/dataspell" %f
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=jetbrains-dataspell
+StartupNotify=true
