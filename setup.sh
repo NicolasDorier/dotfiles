@@ -38,6 +38,8 @@ setup_tools() {
   yay -S jbig2enc --noconfirm
   yay -S ocrmypdf --noconfirm
   sudo pacman -S tesseract tesseract-data-jpn tesseract-data-fra tesseract-data-jpn_vert
+
+  sudo pacman -S rclone
 }
 
 link() {
@@ -81,6 +83,9 @@ install_config() {
   sudo systemctl enable --now mnt-synology-backup.automount
   sudo systemctl enable --now mnt-synology-music.automount
   systemctl --user enable --now hide-waybar-jetbrains.service
+
+  sudo mkdir -p /mnt/aois-public
+  sudo chown nicolasdorier:nicolasdorier /mnt/aois-public
 
   link "$script_dir/.bashrc" ~/.bashrc
 
