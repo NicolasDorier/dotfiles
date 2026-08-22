@@ -1,0 +1,4 @@
+#!/bin/bash
+export MISE_MINIMUM_RELEASE_AGE=0
+mise use -g "aqua:modem-dev/hunk" || exit 1
+exec mise x "aqua:modem-dev/hunk" -- "hunk" "$@"
