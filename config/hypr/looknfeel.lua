@@ -48,3 +48,38 @@
 --     column_width = 0.97,
 --   },
 -- })
+
+hl.config({
+	general = {
+		gaps_in = 2,
+		gaps_out = 0,
+	},
+
+	animations = {
+		enabled = true,
+	},
+
+	decoration = {
+		rounding = 8,
+		inactive_opacity = 0.9,
+		active_opacity = 1.0,
+		fullscreen_opacity = 1.0,
+		dim_modal = false,
+		dim_special = 0.5,
+		blur = {
+			enabled = true,
+			ignore_opacity = true,
+			size = 10,
+			special = false,
+		},
+	},
+})
+
+o.window({ tag = "default-opacity" }, { opacity = "1 1" })
+
+hl.layer_rule({
+	name = "notifications-lr",
+	match = { namespace = "notifications" },
+	blur = true,
+	ignore_alpha = 0,
+})

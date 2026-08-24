@@ -1,2 +1,22 @@
 -- Extra autostart processes.
 -- o.launch_on_start("my-service")
+
+o.exec_on_start("fcitx5 &")
+o.exec_on_start("cd ~/.local/bin && ./startup.sh")
+o.exec_on_start("[workspace name:scratch silent] zeditor ~/ScratchPad")
+o.exec_on_start("uwsm-app -- keepassxc")
+-- o.exec_on_start("uwsm-app -- enteauth")
+o.exec_on_start("[workspace name:social] uwsm-app -- mattermost-desktop")
+o.exec_on_start(o.launch_webapp("https://x.com/"))
+o.exec_on_start("[workspace name:img silent] uwsm-app -- pinta")
+o.exec_on_start("[workspace name:social silent] uwsm-app -- signal-desktop")
+o.exec_on_start("[workspace name:obsidian silent] uwsm app -- obsidian")
+o.exec_on_start('[workspace name:terminal silent] uwsm-app -- xdg-terminal-exec --dir="$(omarchy-cmd-terminal-cwd)"')
+o.exec_on_start(o.launch_webapp("https://www.evernote.com/client/web"))
+o.exec_on_start("[workspace name:productivity silent] uwsm-app -- super-productivity")
+o.exec_on_start("[workspace name:music silent] uwsm-app -- /home/nicolasdorier/.local/bin/vlc")
+
+o.window({ initial_title = "x.com_/" }, { workspace = "name:social silent" })
+o.window({ initial_title = "www.evernote.com_/client/web" }, { workspace = "name:evernote silent" })
+o.window("org.keepassxc.KeePassXC", { workspace = "name:pwd-manager silent" })
+o.window("io.ente.auth", { workspace = "name:pwd-manager silent" })

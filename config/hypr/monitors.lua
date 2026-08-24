@@ -5,6 +5,8 @@ local omarchy_gdk_scale = 2
 local omarchy_monitor_scale = "auto"
 
 hl.env("GDK_SCALE", tostring(omarchy_gdk_scale))
+hl.monitor({ output = "HDMI-A-1", mode = "preferred", position = "auto", scale = omarchy_monitor_scale, mirror = "eDP-1" })
+hl.monitor({ output = "eDP-2", mode = "3840x2400@60", position = "auto", scale = omarchy_monitor_scale })
 hl.monitor({ output = "", mode = "preferred", position = "auto", scale = omarchy_monitor_scale })
 
 -- Configure a specific monitor.
