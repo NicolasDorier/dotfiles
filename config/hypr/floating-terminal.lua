@@ -118,7 +118,10 @@ function M.toggle()
 			workspace = workspace_destination(home_workspace),
 			follow = true,
 		}))
+		return
 	end
+
+	M.open()
 end
 
 function M.open()
