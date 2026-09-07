@@ -95,42 +95,4 @@ hl.config({
 	},
 })
 
-hl.unbind("ALT + TAB")
-o.bind("ALT + TAB", nil, "~/.config/hypr/scripts/swap_focus.sh focusactivetolast")
-
-hl.unbind("SUPER + TAB")
-hl.unbind("SUPER + SHIFT + TAB")
-o.bind("SUPER + TAB", nil, "~/.config/hypr/scripts/swap_focus.sh switch")
-o.bind("SUPER + TAB", nil, hl.dsp.submap("switching"))
-
-hl.define_submap("switching", function()
-	o.bind("SPACE", nil, "~/.config/hypr/scripts/swap_focus.sh select")
-	o.bind("SPACE", nil, hl.dsp.submap("reset"))
-	o.bind("RETURN", nil, "~/.config/hypr/scripts/swap_focus.sh select")
-	o.bind("RETURN", nil, hl.dsp.submap("reset"))
-
-	o.bind("SUPER + LEFT", "Move focus left", hl.dsp.focus({ direction = "l" }))
-	o.bind("SUPER + RIGHT", "Move focus right", hl.dsp.focus({ direction = "r" }))
-	o.bind("SUPER + UP", "Move focus up", hl.dsp.focus({ direction = "u" }))
-	o.bind("SUPER + DOWN", "Move focus down", hl.dsp.focus({ direction = "d" }))
-	o.bind("LEFT", "Move focus left", hl.dsp.focus({ direction = "l" }))
-	o.bind("RIGHT", "Move focus right", hl.dsp.focus({ direction = "r" }))
-	o.bind("UP", "Move focus up", hl.dsp.focus({ direction = "u" }))
-	o.bind("DOWN", "Move focus down", hl.dsp.focus({ direction = "d" }))
-	o.bind("H", "Move focus left", hl.dsp.focus({ direction = "l" }))
-	o.bind("L", "Move focus right", hl.dsp.focus({ direction = "r" }))
-	o.bind("K", "Move focus up", hl.dsp.focus({ direction = "u" }))
-	o.bind("J", "Move focus down", hl.dsp.focus({ direction = "d" }))
-
-	o.bind("TAB", "Cycle to next window", hl.dsp.window.cycle_next())
-	o.bind("SUPER + TAB", "Cycle to next window", hl.dsp.window.cycle_next())
-	o.bind("SUPER + SHIFT + TAB", "Cycle to prev window", hl.dsp.window.cycle_next({ next = false }))
-	o.bind("ALT + TAB", "Cycle to next window", hl.dsp.window.cycle_next())
-	o.bind("ALT + SHIFT + TAB", "Cycle to prev window", hl.dsp.window.cycle_next({ next = false }))
-
-	o.bind("SUPER + TAB", "Reveal active window on top", hl.dsp.window.bring_to_top())
-	o.bind("SUPER + SHIFT + TAB", "Reveal active window on top", hl.dsp.window.bring_to_top())
-	o.bind("ESCAPE", nil, o.notify("Switch mode off"))
-	o.bind("ESCAPE", nil, hl.dsp.submap("reset"))
-	o.bind("D", "Close window", hl.dsp.window.close())
-end)
+require("hypr.window-switcher")
