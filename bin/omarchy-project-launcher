@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+project_root="$HOME/src"
+overrides_file="${XDG_CONFIG_HOME:-$HOME/.config}/omarchy/project-editors"
+state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/omarchy-project-launcher"
+recent_file="$state_dir/recent"
+
+declare -A overrides=()
+declare -A projects=()
+declare -A seen=()
+
+if [[ -f $overrides_file ]]; then
+	while IFS='=' read -r project editor || [[ -n ${project:-}${editor:-} ]]; do
+		[[ -z ${project:-} || $project == \#* ]] && continue
+		case "$editor" in
+		code|rider|pycharm|dataspell) overrides["$project"]="$editor" ;;
+		*) notify-send "Project launcher" "Ignoring invalid editor '$editor' for '$project'" ;;
+		esac
+	done < "$overrides_file"
+fi
+
+shopt -s nullglob
+for path in "$project_root"/*/; do
+	name=${path%/}
+	name=${name##*/}
+	[[ $name == tmp || $name == *$'\t'* || $name == *$'\n'* ]] && continue
+	projects["$name"]=${path%/}
+done
+
+if (( ${#projects[@]} == 0 )); then
+	notify-send "Project launcher" "No projects found in $project_root"
+	exit 1
+fi
+
+editor_for() {
+	local name=$1 path=$2
+	local matches=()
+
+	if [[ -n ${overrides[$name]:-} ]]; then
+		printf '%s\n' "${overrides[$name]}"
+		return
+	fi
+
+	matches=("$path"/*.sln "$path"/*.slnx)
+	if (( ${#matches[@]} > 0 )); then
+		printf 'rider\n'
+	elif [[ -f $path/pyproject.toml || -f $path/setup.py || -f $path/requirements.txt ]]; then
+		printf 'pycharm\n'
+	else
+		matches=("$path"/*.ipynb)
+		if (( ${#matches[@]} > 0 )); then
+			printf 'dataspell\n'
+		else
+			printf 'code\n'
+		fi
+	fi
+}
+
+ordered=()
+if [[ -f $recent_file ]]; then
+	while IFS= read -r name; do
+		if [[ -n ${projects[$name]:-} && -z ${seen[$name]:-} ]]; then
+			ordered+=("$name")
+			seen["$name"]=1
+		fi
+	done < "$recent_file"
+fi
+
+mapfile -t alphabetical < <(printf '%s\n' "${!projects[@]}" | LC_ALL=C sort -f)
+for name in "${alphabetical[@]}"; do
+	if [[ -z ${seen[$name]:-} ]]; then
+		ordered+=("$name")
+	fi
+done
+
+if [[ ${1:-} == --print ]]; then
+	for name in "${ordered[@]}"; do
+		printf '%s\t%s\n' "$name" "$(editor_for "$name" "${projects[$name]}")"
+	done
+	exit 0
+elif (( $# > 0 )); then
+	printf 'Usage: %s [--print]\n' "${0##*/}" >&2
+	exit 2
+fi
+
+selection=$(omarchy menu select Projects "${ordered[@]}") || exit 0
+project=${projects[$selection]:-}
+[[ -n $project ]] || exit 1
+editor=$(editor_for "$selection" "$project")
+
+mkdir -p "$state_dir"
+temporary=$(mktemp "$state_dir/recent.XXXXXX")
+trap 'rm -f "$temporary"' EXIT
+{
+	printf '%s\n' "$selection"
+	for name in "${ordered[@]}"; do
+		[[ $name == "$selection" ]] || printf '%s\n' "$name"
+	done
+} > "$temporary"
+mv "$temporary" "$recent_file"
+trap - EXIT
+
+if ! command -v "$editor" >/dev/null 2>&1; then
+	notify-send "Project launcher" "Editor '$editor' is not installed"
+	exit 1
+fi
+
+case "$editor" in
+	code) exec uwsm-app -- code --new-window "$project" ;;
+	rider) exec uwsm-app -- rider "$project" ;;
+	pycharm) exec uwsm-app -- pycharm "$project" ;;
+	dataspell) exec uwsm-app -- dataspell "$project" ;;
+esac

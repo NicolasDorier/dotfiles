@@ -1,0 +1,5 @@
+# Explicit editor overrides. Other projects are inferred from root markers.
+# Supported editors: code, rider, pycharm, dataspell
+PythonLearning=pycharm
+StudyNotes=dataspell
+lightning=code

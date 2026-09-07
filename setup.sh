@@ -59,6 +59,7 @@ install_config() {
   link "$script_dir/config/ghostty" ~/.config/ghostty
   link "$script_dir/config/yazi" ~/.config/yazi
   link "$script_dir/config/brave-flags.conf" ~/.config/brave-flags.conf
+  link "$script_dir/config/omarchy/project-editors" ~/.config/omarchy/project-editors
   link "$script_dir/config/hypr/apps/jetbrains.conf" ~/.local/share/omarchy/default/hypr/apps/jetbrains.conf
   link "$script_dir/themes" ~/.config/omarchy/themes
 

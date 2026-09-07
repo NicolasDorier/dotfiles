@@ -84,6 +84,10 @@ o.bind("SUPER + SHIFT + N", nil, hl.dsp.window.move({ workspace = "empty" }))
 hl.unbind("SUPER + SHIFT + W")
 o.bind("SUPER + SHIFT + W", "Typora", "uwsm-app -- typora --enable-wayland-ime")
 
+-- SUPER+ALT+SPACE previously opened the Apps menu.
+hl.unbind("SUPER + ALT + SPACE")
+o.bind("SUPER + ALT + SPACE", "Projects", "~/.local/bin/omarchy-project-launcher")
+
 hl.config({
 	binds = {
 		workspace_back_and_forth = true,
