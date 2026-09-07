@@ -62,10 +62,11 @@ o.bind("SUPER + SHIFT + G", nil, hl.dsp.focus({ workspace = "5" }))
 hl.unbind("SUPER + R")
 o.bind("SUPER + R", nil, hl.dsp.focus({ workspace = "name:scratch" }))
 
-hl.unbind("SUPER + SHIFT + GRAVE")
-o.bind("SUPER + SHIFT + GRAVE", "Toggle floating terminal group", floating_terminal.toggle)
 hl.unbind("SUPER + GRAVE")
-o.bind("SUPER + GRAVE", nil, hl.dsp.focus({ workspace = "name:terminal" }))
+o.bind("SUPER + GRAVE", "Toggle floating terminal group", floating_terminal.toggle)
+
+hl.unbind("SUPER + SHIFT + GRAVE")
+o.bind("SUPER + SHIFT + GRAVE", nil, hl.dsp.focus({ workspace = "name:terminal" }))
 
 hl.unbind("SUPER + SHIFT + LEFT")
 hl.unbind("SUPER + SHIFT + RIGHT")

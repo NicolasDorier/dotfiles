@@ -6,7 +6,17 @@ active_pid=$(jq -r '.pid // empty' <<<"$active_window")
 
 case "$active_class" in
 code)
-	cwd=$(readlink -f "/proc/$active_pid/cwd" 2>/dev/null)
+	process_cwd=$(readlink -f "/proc/$active_pid/cwd" 2>/dev/null)
+	while IFS= read -r -d '' cmdline_arg; do
+		read -r -a args <<<"$cmdline_arg"
+		for arg in "${args[@]}"; do
+			[[ $arg == -* ]] && continue
+			candidate=$arg
+			[[ $candidate != /* ]] && candidate="$process_cwd/$candidate"
+			[[ -d $candidate ]] && cwd=$(readlink -f -- "$candidate")
+		done
+	done <"/proc/$active_pid/cmdline"
+	cwd=${cwd:-$process_cwd}
 	;;
 jetbrains-rider)
 	while read -r child_pid; do
