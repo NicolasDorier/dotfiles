@@ -1,0 +1,4 @@
+#!/bin/bash
+
+exec setsid uwsm-app -- xdg-terminal-exec \
+	--dir="$("$HOME/.local/bin/omarchy-cmd-terminal-cwd")" "$@"

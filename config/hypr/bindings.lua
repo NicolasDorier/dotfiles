@@ -28,6 +28,14 @@
 -- o.bind("SUPER + H", nil, "voxtype record toggle")
 -- o.bind("SUPER + PERIOD", nil, "omarchy-shell shell toggle omarchy.emojis")
 
+local floating_terminal = require("hypr.floating-terminal")
+
+hl.unbind("SUPER + SHIFT + RETURN")
+o.bind("SUPER + SHIFT + RETURN", "Floating terminal", floating_terminal.open)
+
+hl.unbind("SUPER + RETURN")
+o.bind("SUPER + RETURN", "Terminal", "~/.local/bin/launch-terminal-from-app-cwd")
+
 hl.unbind("SUPER + L")
 o.bind("SUPER + L", nil, "omarchy-system-lock")
 o.bind("SUPER + SHIFT + L", nil, "systemctl suspend", { locked = true })
@@ -54,8 +62,15 @@ o.bind("SUPER + SHIFT + G", nil, hl.dsp.focus({ workspace = "5" }))
 hl.unbind("SUPER + R")
 o.bind("SUPER + R", nil, hl.dsp.focus({ workspace = "name:scratch" }))
 
+hl.unbind("SUPER + SHIFT + GRAVE")
+o.bind("SUPER + SHIFT + GRAVE", "Toggle floating terminal group", floating_terminal.toggle)
 hl.unbind("SUPER + GRAVE")
 o.bind("SUPER + GRAVE", nil, hl.dsp.focus({ workspace = "name:terminal" }))
+
+hl.unbind("SUPER + SHIFT + LEFT")
+hl.unbind("SUPER + SHIFT + RIGHT")
+o.bind("SUPER + SHIFT + LEFT", "Previous terminal tab", hl.dsp.group.prev())
+o.bind("SUPER + SHIFT + RIGHT", "Next terminal tab", hl.dsp.group.next())
 
 hl.unbind("SUPER + SHIFT + M")
 o.bind("SUPER + SHIFT + M", nil, hl.dsp.focus({ workspace = "name:music" }))
@@ -70,14 +85,14 @@ hl.unbind("SUPER + SHIFT + W")
 o.bind("SUPER + SHIFT + W", "Typora", "uwsm-app -- typora --enable-wayland-ime")
 
 hl.config({
-  binds = {
-    workspace_back_and_forth = true,
-    hide_special_on_workspace_change = true,
-  },
-  misc = {
-    middle_click_paste = true,
-    background_color = "0x000000",
-  },
+	binds = {
+		workspace_back_and_forth = true,
+		hide_special_on_workspace_change = true,
+	},
+	misc = {
+		middle_click_paste = true,
+		background_color = "0x000000",
+	},
 })
 
 hl.unbind("ALT + TAB")
@@ -89,33 +104,33 @@ o.bind("SUPER + TAB", nil, "~/.config/hypr/scripts/swap_focus.sh switch")
 o.bind("SUPER + TAB", nil, hl.dsp.submap("switching"))
 
 hl.define_submap("switching", function()
-  o.bind("SPACE", nil, "~/.config/hypr/scripts/swap_focus.sh select")
-  o.bind("SPACE", nil, hl.dsp.submap("reset"))
-  o.bind("RETURN", nil, "~/.config/hypr/scripts/swap_focus.sh select")
-  o.bind("RETURN", nil, hl.dsp.submap("reset"))
+	o.bind("SPACE", nil, "~/.config/hypr/scripts/swap_focus.sh select")
+	o.bind("SPACE", nil, hl.dsp.submap("reset"))
+	o.bind("RETURN", nil, "~/.config/hypr/scripts/swap_focus.sh select")
+	o.bind("RETURN", nil, hl.dsp.submap("reset"))
 
-  o.bind("SUPER + LEFT", "Move focus left", hl.dsp.focus({ direction = "l" }))
-  o.bind("SUPER + RIGHT", "Move focus right", hl.dsp.focus({ direction = "r" }))
-  o.bind("SUPER + UP", "Move focus up", hl.dsp.focus({ direction = "u" }))
-  o.bind("SUPER + DOWN", "Move focus down", hl.dsp.focus({ direction = "d" }))
-  o.bind("LEFT", "Move focus left", hl.dsp.focus({ direction = "l" }))
-  o.bind("RIGHT", "Move focus right", hl.dsp.focus({ direction = "r" }))
-  o.bind("UP", "Move focus up", hl.dsp.focus({ direction = "u" }))
-  o.bind("DOWN", "Move focus down", hl.dsp.focus({ direction = "d" }))
-  o.bind("H", "Move focus left", hl.dsp.focus({ direction = "l" }))
-  o.bind("L", "Move focus right", hl.dsp.focus({ direction = "r" }))
-  o.bind("K", "Move focus up", hl.dsp.focus({ direction = "u" }))
-  o.bind("J", "Move focus down", hl.dsp.focus({ direction = "d" }))
+	o.bind("SUPER + LEFT", "Move focus left", hl.dsp.focus({ direction = "l" }))
+	o.bind("SUPER + RIGHT", "Move focus right", hl.dsp.focus({ direction = "r" }))
+	o.bind("SUPER + UP", "Move focus up", hl.dsp.focus({ direction = "u" }))
+	o.bind("SUPER + DOWN", "Move focus down", hl.dsp.focus({ direction = "d" }))
+	o.bind("LEFT", "Move focus left", hl.dsp.focus({ direction = "l" }))
+	o.bind("RIGHT", "Move focus right", hl.dsp.focus({ direction = "r" }))
+	o.bind("UP", "Move focus up", hl.dsp.focus({ direction = "u" }))
+	o.bind("DOWN", "Move focus down", hl.dsp.focus({ direction = "d" }))
+	o.bind("H", "Move focus left", hl.dsp.focus({ direction = "l" }))
+	o.bind("L", "Move focus right", hl.dsp.focus({ direction = "r" }))
+	o.bind("K", "Move focus up", hl.dsp.focus({ direction = "u" }))
+	o.bind("J", "Move focus down", hl.dsp.focus({ direction = "d" }))
 
-  o.bind("TAB", "Cycle to next window", hl.dsp.window.cycle_next())
-  o.bind("SUPER + TAB", "Cycle to next window", hl.dsp.window.cycle_next())
-  o.bind("SUPER + SHIFT + TAB", "Cycle to prev window", hl.dsp.window.cycle_next({ next = false }))
-  o.bind("ALT + TAB", "Cycle to next window", hl.dsp.window.cycle_next())
-  o.bind("ALT + SHIFT + TAB", "Cycle to prev window", hl.dsp.window.cycle_next({ next = false }))
+	o.bind("TAB", "Cycle to next window", hl.dsp.window.cycle_next())
+	o.bind("SUPER + TAB", "Cycle to next window", hl.dsp.window.cycle_next())
+	o.bind("SUPER + SHIFT + TAB", "Cycle to prev window", hl.dsp.window.cycle_next({ next = false }))
+	o.bind("ALT + TAB", "Cycle to next window", hl.dsp.window.cycle_next())
+	o.bind("ALT + SHIFT + TAB", "Cycle to prev window", hl.dsp.window.cycle_next({ next = false }))
 
-  o.bind("SUPER + TAB", "Reveal active window on top", hl.dsp.window.bring_to_top())
-  o.bind("SUPER + SHIFT + TAB", "Reveal active window on top", hl.dsp.window.bring_to_top())
-  o.bind("ESCAPE", nil, o.notify("Switch mode off"))
-  o.bind("ESCAPE", nil, hl.dsp.submap("reset"))
-  o.bind("D", "Close window", hl.dsp.window.close())
+	o.bind("SUPER + TAB", "Reveal active window on top", hl.dsp.window.bring_to_top())
+	o.bind("SUPER + SHIFT + TAB", "Reveal active window on top", hl.dsp.window.bring_to_top())
+	o.bind("ESCAPE", nil, o.notify("Switch mode off"))
+	o.bind("ESCAPE", nil, hl.dsp.submap("reset"))
+	o.bind("D", "Close window", hl.dsp.window.close())
 end)

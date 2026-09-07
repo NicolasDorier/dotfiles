@@ -1,0 +1,26 @@
+#!/bin/bash
+
+active_window=$(hyprctl activewindow -j)
+active_class=$(jq -r '.class // empty' <<<"$active_window")
+active_pid=$(jq -r '.pid // empty' <<<"$active_window")
+
+case "$active_class" in
+code)
+	cwd=$(readlink -f "/proc/$active_pid/cwd" 2>/dev/null)
+	;;
+jetbrains-rider)
+	while read -r child_pid; do
+		child_exe=$(readlink -f "/proc/$child_pid/exe" 2>/dev/null)
+		if grep -Fqsx "$child_exe" /etc/shells; then
+			cwd=$(readlink -f "/proc/$child_pid/cwd" 2>/dev/null)
+			break
+		fi
+	done < <(pgrep -P "$active_pid" | sort -rn)
+	;;
+esac
+
+if [[ -d $cwd ]]; then
+	printf '%s\n' "$cwd"
+else
+	exec /usr/share/omarchy/bin/omarchy-cmd-terminal-cwd
+fi
