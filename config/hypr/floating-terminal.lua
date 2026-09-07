@@ -7,7 +7,7 @@
 --   group. Locking prevents subsequently launched unrelated apps from joining.
 -- - Additional terminals inherit the existing group's size; never resize them
 --   during insertion because resizing one grouped member resizes the container.
--- - omarchy-launch-terminal derives its cwd from the active terminal, so the
+-- - The app-aware terminal launcher derives its cwd from the active app, so an
 --   existing group member is focused shortly before launching another member.
 -- - Hyprland applies focus, group, and lock changes asynchronously. The polling
 --   below intentionally performs those transitions across separate timer ticks.
@@ -21,6 +21,8 @@
 --   can therefore only be restored to the workspace from which it was hidden.
 
 local M = {}
+
+local terminal_command = (os.getenv("HOME") or "") .. "/.local/bin/launch-terminal-from-app-cwd"
 
 -- This is runtime-only state and is reset whenever Hyprland reloads the config.
 -- Keying by workspace ID keeps focus restoration independent per home workspace.
@@ -154,7 +156,7 @@ function M.open()
 		-- before exec so the compositor has applied the focus transition.
 		hl.dispatch(hl.dsp.focus({ window = target }))
 		hl.timer(function()
-			hl.exec_cmd("omarchy-launch-terminal", launch_rules)
+			hl.exec_cmd(terminal_command, launch_rules)
 		end, { timeout = 50, type = "oneshot" })
 
 		local attempts = 0
@@ -219,7 +221,7 @@ function M.open()
 	launch_rules.center = true
 	launch_rules.group = "new lock"
 	launch_rules.size = { "monitor_w * 0.8", "monitor_h * 0.8" }
-	hl.exec_cmd("omarchy-launch-terminal", launch_rules)
+	hl.exec_cmd(terminal_command, launch_rules)
 end
 
 return M

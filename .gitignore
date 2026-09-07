@@ -1,2 +1,3 @@
 bin/coderabbit
 bin/cr
+*.lua.bak.*
