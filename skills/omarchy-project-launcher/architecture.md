@@ -36,7 +36,9 @@ configuration directory is also linked.
    selection interface.
 7. The selected project is moved to the front of the state file using an
    atomic temporary-file replacement.
-8. The selected editor is launched through `uwsm-app`.
+8. The launcher resolves the project directory or unique Rider solution as the
+   launch target.
+9. The selected editor is launched through `uwsm-app`.
 
 Cancelling the menu exits successfully without changing state or opening an
 editor.
@@ -66,9 +68,12 @@ Current intentional overrides:
 ## Launch Behavior
 
 - VS Code receives `--new-window` explicitly.
-- Rider, PyCharm, and DataSpell receive the project directory and use their
-  `confirmOpenNewProject2=0` preference. In the installed JetBrains builds,
-  value `0` means open in a new window.
+- Rider receives the root `.sln` or `.slnx` file when exactly one exists. With
+  zero or multiple root solutions, it receives the project directory so Rider
+  can resolve the ambiguous case.
+- PyCharm and DataSpell receive the project directory. All three JetBrains
+  editors use their `confirmOpenNewProject2=0` preference; in the installed
+  builds, value `0` means open in a new window.
 - `uwsm-app --` places each GUI launch in the expected desktop application
   scope.
 

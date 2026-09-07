@@ -89,8 +89,10 @@ shellcheck ~/dotfiles/bin/omarchy-project-launcher
 ```
 
 Confirm that `--print` contains every expected direct child of `~/src`, omits
-`tmp`, and reports the intended editor for representative projects. The
-diagnostic mode must not open the menu, launch an editor, or update recency.
+`tmp`, and reports the intended editor and launch target for representative
+projects. A Rider project with exactly one root solution must report that
+`.sln` or `.slnx` file as its target. The diagnostic mode must not open the
+menu, launch an editor, or update recency.
 
 After binding changes, also confirm:
 

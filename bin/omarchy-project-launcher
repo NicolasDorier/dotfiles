@@ -58,6 +58,21 @@ editor_for() {
 	fi
 }
 
+target_for() {
+	local editor=$1 path=$2
+	local solutions=()
+
+	if [[ $editor == rider ]]; then
+		solutions=("$path"/*.sln "$path"/*.slnx)
+		if (( ${#solutions[@]} == 1 )); then
+			printf '%s\n' "${solutions[0]}"
+			return
+		fi
+	fi
+
+	printf '%s\n' "$path"
+}
+
 ordered=()
 if [[ -f $recent_file ]]; then
 	while IFS= read -r name; do
@@ -77,7 +92,8 @@ done
 
 if [[ ${1:-} == --print ]]; then
 	for name in "${ordered[@]}"; do
-		printf '%s\t%s\n' "$name" "$(editor_for "$name" "${projects[$name]}")"
+		editor=$(editor_for "$name" "${projects[$name]}")
+		printf '%s\t%s\t%s\n' "$name" "$editor" "$(target_for "$editor" "${projects[$name]}")"
 	done
 	exit 0
 elif (( $# > 0 )); then
@@ -89,6 +105,7 @@ selection=$(omarchy menu select Projects "${ordered[@]}") || exit 0
 project=${projects[$selection]:-}
 [[ -n $project ]] || exit 1
 editor=$(editor_for "$selection" "$project")
+target=$(target_for "$editor" "$project")
 
 mkdir -p "$state_dir"
 temporary=$(mktemp "$state_dir/recent.XXXXXX")
@@ -108,8 +125,8 @@ if ! command -v "$editor" >/dev/null 2>&1; then
 fi
 
 case "$editor" in
-	code) exec uwsm-app -- code --new-window "$project" ;;
-	rider) exec uwsm-app -- rider "$project" ;;
-	pycharm) exec uwsm-app -- pycharm "$project" ;;
-	dataspell) exec uwsm-app -- dataspell "$project" ;;
+	code) exec uwsm-app -- code --new-window "$target" ;;
+	rider) exec uwsm-app -- rider "$target" ;;
+	pycharm) exec uwsm-app -- pycharm "$target" ;;
+	dataspell) exec uwsm-app -- dataspell "$target" ;;
 esac
