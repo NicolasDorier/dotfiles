@@ -1,0 +1,17 @@
+{
+  "name": "focused-workspace-cwd",
+  "displayName": "Focused Workspace CWD",
+  "description": "Publishes the focused VS Code workspace folder for external launchers.",
+  "version": "1.0.0",
+  "publisher": "nicolasdorier",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js"
+}

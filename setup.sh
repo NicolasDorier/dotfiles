@@ -100,6 +100,13 @@ install_config() {
   sudo cp $script_dir/hosts /etc/hosts && sudo chown root /etc/hosts
 }
 
+install_vscode_extensions() {
+  local extension="$script_dir/vscode/focused-workspace-cwd"
+  local version
+  version="$(jq -r .version "$extension/package.json")"
+  link "$extension" "$HOME/.vscode/extensions/nicolasdorier.focused-workspace-cwd-$version"
+}
+
 
 setup_mime() {
     xdg-mime default vlc.desktop video/mp4
@@ -130,6 +137,7 @@ _is_sourced() {
 _main() {
   setup_tools
   install_config
+  install_vscode_extensions
   setup_mime
 }
 
