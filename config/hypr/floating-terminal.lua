@@ -97,7 +97,8 @@ function M.toggle()
 	local hidden_workspace_name = "floating-terminal-" .. tostring(home_workspace.id)
 	local visible_terminal = find_tagged_window(home_workspace, "floating-terminal")
 	if visible_terminal then
-		-- Moving any member moves the complete group to its hidden workspace.
+		-- Moving the selected member preserves the active tab across the move.
+		visible_terminal = visible_terminal.group and visible_terminal.group.current or visible_terminal
 		hl.dispatch(hl.dsp.window.move({
 			window = visible_terminal,
 			workspace = "special:" .. hidden_workspace_name,
@@ -110,6 +111,7 @@ function M.toggle()
 	local hidden_workspace = hl.get_workspace("special:" .. hidden_workspace_name)
 	local hidden_terminal = find_tagged_window(hidden_workspace, "floating-terminal")
 	if hidden_terminal then
+		hidden_terminal = hidden_terminal.group and hidden_terminal.group.current or hidden_terminal
 		-- Save focus immediately before showing the group so hiding it restores the
 		-- exact window that was active, not merely Hyprland's next focus candidate.
 		remember_focus(home_workspace)

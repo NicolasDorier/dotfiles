@@ -40,6 +40,8 @@ setup_tools() {
   sudo pacman -S tesseract tesseract-data-jpn tesseract-data-fra tesseract-data-jpn_vert
 
   sudo pacman -S rclone
+  # Device pairing and folder state stay machine-local; see docs/syncthing.md.
+  sudo pacman -S --needed syncthing
 }
 
 link() {
@@ -78,6 +80,7 @@ install_config() {
     "$script_dir/system/user/inotify-youtube.service" \
     ~/.config/systemd/user/
   sudo systemctl daemon-reload
+  systemctl --user daemon-reload
 
   # Put credentials in /etc/samba/credentials with the following format
   # username=user
@@ -86,6 +89,7 @@ install_config() {
   sudo systemctl enable --now mnt-synology-backup.automount
   sudo systemctl enable --now mnt-synology-music.automount
   systemctl --user enable --now hide-waybar-jetbrains.service
+  systemctl --user enable --now syncthing.service
 
   sudo mkdir -p /mnt/aois-public
   sudo chown nicolasdorier:nicolasdorier /mnt/aois-public
