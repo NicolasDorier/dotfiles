@@ -17,6 +17,19 @@ jetbrains-rider)
 			break
 		fi
 	done < <(pgrep -P "$active_pid" | sort -rn)
+
+	if [[ ! -d $cwd ]]; then
+		while IFS= read -r -d '' project_path; do
+			case "$project_path" in
+			*.sln | *.slnx | *.csproj | *.fsproj | *.vbproj)
+				if [[ -f $project_path ]]; then
+					cwd=$(dirname -- "$project_path")
+					break
+				fi
+				;;
+			esac
+		done <"/proc/$active_pid/cmdline"
+	fi
 	;;
 esac
 
