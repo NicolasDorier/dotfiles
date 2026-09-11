@@ -5,8 +5,9 @@ hl.unbind("SUPER + TAB")
 hl.unbind("SUPER + SHIFT + TAB")
 
 local switch_origin_address
+local floating_terminal = require("hypr.floating-terminal")
 
-o.bind("SUPER + TAB", nil, function()
+local function enter_switch_mode()
 	local active = hl.get_active_window()
 	if not active then
 		return
@@ -19,6 +20,14 @@ o.bind("SUPER + TAB", nil, function()
 
 	hl.exec_cmd("notify-send 'Switch mode on'")
 	hl.dispatch(hl.dsp.submap("switching"))
+end
+
+o.bind("SUPER + TAB", nil, function()
+	if floating_terminal.hide() then
+		hl.timer(enter_switch_mode, { timeout = 100, type = "oneshot" })
+	else
+		enter_switch_mode()
+	end
 end)
 
 hl.define_submap("switching", function()

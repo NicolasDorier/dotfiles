@@ -88,10 +88,10 @@ local function restore_focus(workspace)
 	end, { timeout = 50, type = "oneshot" })
 end
 
-function M.toggle()
+function M.hide()
 	local home_workspace = hl.get_active_workspace()
 	if not home_workspace then
-		return
+		return false
 	end
 
 	local hidden_workspace_name = "floating-terminal-" .. tostring(home_workspace.id)
@@ -105,8 +105,23 @@ function M.toggle()
 			follow = false,
 		}))
 		restore_focus(home_workspace)
+		return true
+	end
+
+	return false
+end
+
+function M.toggle()
+	if M.hide() then
 		return
 	end
+
+	local home_workspace = hl.get_active_workspace()
+	if not home_workspace then
+		return
+	end
+
+	local hidden_workspace_name = "floating-terminal-" .. tostring(home_workspace.id)
 
 	local hidden_workspace = hl.get_workspace("special:" .. hidden_workspace_name)
 	local hidden_terminal = find_tagged_window(hidden_workspace, "floating-terminal")
